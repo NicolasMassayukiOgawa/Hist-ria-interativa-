@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aventura dos Cinco Amigos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="content">
+  <h1>Aventura dos Cinco Amigos</h1>
+  <p id="story"></p>
+  <div id="choices"></div>
+  <img id="storyImage" src="" alt="Imagem da história" />
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
