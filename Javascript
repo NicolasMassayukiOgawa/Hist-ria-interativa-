@@ -1,0 +1,80 @@
+const storyData = {
+  start: {
+    text: "Cinco amigos – decidem partir para uma grande aventura na floresta misteriosa. Eles chegaram na entrada da floresta e encontraram três caminhos. O que eles devem fazer?",
+    choices: [
+      { text: "Ir pelo caminho da esquerda", next: "path1" },
+      { text: "Seguir pelo caminho do meio", next: "path2" },
+      { text: "Ir pelo caminho da direita", next: "path3" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfgVAKpKs4PfI16XgtxeJKpjhPYEagXlXesXuScmWwDmVwxTmC5UWP3iG5&s=10"
+  },
+  path1: {
+    text: "Eles escolhem o caminho da esquerda, que os leva a uma caverna escura. Eles ouvem sons estranhos vindo de dentro. O que eles fazem?",
+    choices: [
+      { text: "Entrar na caverna", next: "cave" },
+      { text: "Voltar para a entrada da floresta", next: "start" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8ymooNyUwphYQCNXTkYt2tr4GRtq3Uhp2NdzfXzyngdE3agbkdw6NWk-D&s=10"
+  },
+  path2: {
+    text: "O caminho do meio os leva a uma ponte quebrada sobre um rio turbulento. Eles precisam atravessar. O que fazem?",
+    choices: [
+      { text: "Tentar atravessar pela ponte", next: "bridge" },
+      { text: "Voltar e escolher outro caminho", next: "start" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-jTZ29kf7QyBg1i3EElQeEjIufaNIz501Bcaz46xc82F56LuTWatD3Kw&s=10"
+  },
+  path3: {
+    text: "O caminho da direita leva até uma grande árvore com uma estranha porta. Eles ficam curiosos. O que fazem?",
+    choices: [
+      { text: "Abrir a porta", next: "door" },
+      { text: "Ignorar a porta e continuar", next: "start" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm33-trd0PZke1weCwGMHcjyMgMJl9Y5eiMw&usqp=CAU"
+  },
+  cave: {
+    text: "Na caverna, os amigos encontram um enorme tesouro guardado por um dragão. Eles decidem enfrentar o dragão e ganham o tesouro!",
+    choices: [
+      { text: "Parabéns! Fim da aventura", next: "end" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm33-trd0PZke1weCwGMHcjyMgMJl9Y5eiMw&usqp=CAU"
+  },
+  bridge: {
+    text: "Ao tentar atravessar a ponte, ela desaba, e os amigos caem no rio. Felizmente, eles nadam até a margem, mas sem o tesouro.",
+    choices: [
+      { text: "Tentar novamente", next: "start" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-jTZ29kf7QyBg1i3EElQeEjIufaNIz501Bcaz46xc82F56LuTWatD3Kw&s=10"
+  },
+  door: {
+    text: "Eles abrem a porta e encontram um mundo mágico onde são coroados como heróis. Eles exploram e retornam como grandes aventureiros.",
+    choices: [
+      { text: "Parabéns! Fim da aventura", next: "end" }
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVOkapsnNFzcs2z6-Er-IMV3NDmkkWZZXnPDb77Hrys_6vUSYoaCYSwIZc&s=10"
+  },
+  end: {
+    text: "Fim da aventura! Os amigos retornam para casa com novas histórias para contar.",
+    choices: [],
+    image: ""
+  }
+};
+
+function updateStory(scene) {
+  document.getElementById('story').innerText = storyData[scene].text;
+  const choicesDiv = document.getElementById('choices');
+  choicesDiv.innerHTML = '';
+  storyData[scene].choices.forEach(choice => {
+    const button = document.createElement('button');
+    button.innerText = choice.text;
+    button.onclick = function() {
+      updateStory(choice.next);
+    };
+    choicesDiv.appendChild(button);
+  });
+  document.getElementById('storyImage').src = storyData[scene].image;
+}
+
+window.onload = function() {
+  updateStory('start');
+};
